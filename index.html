@@ -50,7 +50,7 @@
             padding: 0;
             position: relative;
             background-color: #f8f9fa;
-            min-height: 50px; /* 섹션 최소 높이 추가 축소 */
+            min-height: 100px;
         }
         .hero-img-box {
             width: 100%;
@@ -60,9 +60,9 @@
         .hero-img-box img {
             border-radius: 0;
             width: 100%;
-            /* 가로는 100% 유지, 세로는 기존 350px에서 더 줄인 200px 내외로 조정 (반절 수준) */
-            height: 200px; 
-            object-fit: cover; /* 가로를 채우면서 세로만 잘리도록 설정 */
+            /* 가로 세로 비율을 유지하면서 최대 높이만 제한하는 방식으로 원복 */
+            max-height: 350px; 
+            object-fit: contain;
             margin: 0 auto;
         }
 
@@ -214,7 +214,7 @@
 </head>
 <body>
 
-    <!-- 최상단 매장 사진 (가로는 꽉 차게, 세로는 더 슬림하게 조정) -->
+    <!-- 최상단 매장 사진 (비율 유지 원복) -->
     <section class="hero-section">
         <div class="hero-img-box">
             <img id="main-photo" src="photo.jpeg" alt="매장 메인 전경" 
@@ -321,7 +321,7 @@
                 image.src = nextSrc;
             } else {
                 image.onerror = null;
-                image.src = 'https://via.placeholder.com/800x200?text=photo.jpeg+이미지를+찾을+수+없음';
+                image.src = 'https://via.placeholder.com/800x350?text=photo.jpeg+이미지를+찾을+수+없음';
             }
         }
 
