@@ -60,7 +60,6 @@
         .hero-img-box img {
             border-radius: 0;
             width: 100%;
-            /* 가로 세로 비율을 유지하면서 최대 높이만 제한하는 방식으로 원복 */
             max-height: 350px; 
             object-fit: contain;
             margin: 0 auto;
@@ -177,6 +176,56 @@
         }
         .submit-btn:hover { background-color: #0056b3; }
 
+        /* 실시간 예약 현황 스타일 */
+        .status-section {
+            background-color: #fff;
+            padding: 40px 20px;
+        }
+        .status-container {
+            max-width: 500px;
+            margin: 0 auto;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .status-header {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .status-list {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            background: #fff;
+        }
+        .status-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f8f8f8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            animation: slideUp 0.5s ease-out;
+        }
+        .status-item .name { font-weight: 600; color: #333; }
+        .status-item .phone { color: #888; }
+        .status-item .badge {
+            background: #e1f0ff;
+            color: #007aff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
         .fixed-bottom {
             position: fixed;
             bottom: 0; left: 0; width: 100%;
@@ -214,7 +263,7 @@
 </head>
 <body>
 
-    <!-- 최상단 매장 사진 (비율 유지 원복) -->
+    <!-- 최상단 매장 사진 -->
     <section class="hero-section">
         <div class="hero-img-box">
             <img id="main-photo" src="photo.jpeg" alt="매장 메인 전경" 
@@ -284,6 +333,18 @@
         </div>
     </section>
 
+    <!-- 실시간 예약 현황 섹션 (재추가) -->
+    <section class="status-section">
+        <h2>📊 실시간 예약/상담 현황</h2>
+        <div class="status-container">
+            <div class="status-header">실시간 접수 목록 (방금 전)</div>
+            <div id="statusList" class="status-list">
+                <!-- 자바스크립트로 항목 추가됨 -->
+            </div>
+        </div>
+        <p style="font-size: 12px; color: #999; margin-top: 15px;">* 개인정보 보호를 위해 성함과 번호 일부를 마스킹 처리하였습니다.</p>
+    </section>
+
     <div style="height: 100px;"></div>
 
     <div class="fixed-bottom">
@@ -304,6 +365,37 @@
     </div>
 
     <script>
+        // 실시간 예약 현황 데이터 시뮬레이션
+        const firstNames = ["김", "이", "박", "최", "정", "강", "조", "윤", "장", "임"];
+        const lastNames = ["*현", "*준", "*서", "*우", "*진", "*아", "*미", "*영", "*훈", "*희"];
+        const phones = ["010-****-1234", "010-****-5678", "010-****-9921", "010-****-4432", "010-****-0012"];
+        const types = ["신규가입", "번호이동", "기기변경", "상담예약", "방문예약"];
+
+        function addStatusItem() {
+            const list = document.getElementById('statusList');
+            const name = firstNames[Math.floor(Math.random() * 10)] + lastNames[Math.floor(Math.random() * 10)];
+            const phone = phones[Math.floor(Math.random() * 5)];
+            const type = types[Math.floor(Math.random() * 5)];
+            
+            const item = document.createElement('div');
+            item.className = 'status-item';
+            item.innerHTML = `
+                <span class="name">${name}</span>
+                <span class="phone">${phone}</span>
+                <span class="badge">${type}</span>
+            `;
+            
+            list.prepend(item);
+            
+            if (list.children.length > 6) {
+                list.removeChild(list.lastChild);
+            }
+        }
+
+        // 초기 아이템 생성 및 주기적 업데이트
+        setInterval(addStatusItem, 3000);
+        for(let i=0; i<5; i++) addStatusItem();
+
         function handleImageError(image) {
             const fallbackSources = [
                 'photo.jpg',
