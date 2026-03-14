@@ -109,6 +109,26 @@
             color: #333;
         }
 
+        /* 리뷰 섹션 */
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .review-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+        .review-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+        }
+
         /* 상담 신청 폼 */
         .contact-section {
             background-color: #f1f3f5;
@@ -249,6 +269,7 @@
 
         @media (max-width: 600px) {
             .branch-grid { grid-template-columns: 1fr; }
+            .review-grid { grid-template-columns: 1fr; }
             .form-row { flex-direction: column; }
             .status-item {
                 grid-template-columns: 60px 90px 1fr 60px;
@@ -277,6 +298,22 @@
         <div style="background: #fff; padding: 10px; border-radius: 12px; border: 1px solid #ddd;">
             <img src="index.html%EC%8A%A4%ED%8C%A9%ED%91%9C.jpg" alt="실시간 가격표" 
                  onerror="this.src='https://via.placeholder.com/800x800?text=스팩표+이미지+파일명+확인필요'">
+        </div>
+    </section>
+
+    <!-- 새로 추가된 고객 리뷰 섹션 -->
+    <section class="review-section">
+        <h2>⭐ 베스트 방문 후기 ⭐</h2>
+        <div class="review-grid">
+            <div class="review-card">
+                <img src="리뷰1.Jpeg" alt="고객 리뷰 1" onerror="this.src='https://via.placeholder.com/400x500?text=리뷰1'">
+            </div>
+            <div class="review-card">
+                <img src="리뷰2.Jpeg" alt="고객 리뷰 2" onerror="this.src='https://via.placeholder.com/400x500?text=리뷰2'">
+            </div>
+            <div class="review-card">
+                <img src="리뷰3.Jpeg" alt="고객 리뷰 3" onerror="this.src='https://via.placeholder.com/400x500?text=리뷰3'">
+            </div>
         </div>
     </section>
 
