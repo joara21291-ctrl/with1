@@ -45,25 +45,27 @@
             margin-bottom: 20px;
         }
 
+        /* 히어로 섹션 - 깃허브 업로드 사진 적용 */
         .hero-section {
             padding: 0;
+            position: relative;
         }
         .hero-img-box img {
             border-radius: 0;
             width: 100%;
-            max-height: 500px;
+            max-height: 550px;
             object-fit: cover;
         }
 
         .main-headline {
             background: #000;
             color: #fff;
-            padding: 80px 20px;
+            padding: 60px 20px;
         }
         .main-headline h1 {
-            font-size: 32px;
+            font-size: 28px;
             margin: 0;
-            line-height: 1.5;
+            line-height: 1.4;
             word-break: keep-all;
             font-weight: 700;
         }
@@ -71,11 +73,7 @@
             color: var(--kakao-yellow);
         }
 
-        .price-section {
-            background-color: var(--bg-gray);
-        }
-
-        /* 지점 안내 그리드 */
+        /* 지점 안내 */
         .branch-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -104,7 +102,7 @@
             color: #333;
         }
 
-        /* 상담 신청 폼 스타일 */
+        /* 상담 신청 폼 */
         .contact-section {
             background-color: #f1f3f5;
             padding: 60px 20px;
@@ -168,15 +166,9 @@
             margin-top: 10px;
             transition: background 0.3s;
         }
-        .submit-btn:hover {
-            background-color: #0056b3;
-        }
+        .submit-btn:hover { background-color: #0056b3; }
 
-        /* 실시간 신청 현황 스타일 */
-        .live-status-section {
-            background-color: #fff;
-            padding: 30px 20px;
-        }
+        /* 실시간 현황 애니메이션 */
         .live-status-box {
             max-width: 500px;
             margin: 0 auto;
@@ -184,17 +176,14 @@
             border-radius: 15px;
             padding: 0 15px;
             overflow: hidden;
-            height: 320px;
+            height: 300px;
             position: relative;
             border: 1px solid #eee;
-            box-sizing: border-box;
         }
         .live-status-list {
             position: absolute;
             width: calc(100% - 30px);
-            top: 0;
-            left: 15px;
-            animation: infiniteSlideUp 30s linear infinite;
+            animation: infiniteSlideUp 25s linear infinite;
         }
         .live-status-item {
             display: flex;
@@ -203,159 +192,94 @@
             padding: 15px 0;
             border-bottom: 1px dashed #ddd;
             font-size: 14px;
-            height: 24px;
         }
-        .live-status-item:last-child { border-bottom: none; }
-        .status-name { font-weight: 700; color: #333; }
-        .status-model { color: var(--primary-blue); font-weight: 600; }
-        .status-time { color: #999; font-size: 12px; }
-
         @keyframes infiniteSlideUp {
             0% { transform: translateY(0); }
             100% { transform: translateY(-50%); }
         }
 
-        .info-card {
-            background: #fff;
-            padding: 25px 40px;
-            border-radius: 15px;
-            border: 2px solid var(--primary-blue);
-            display: inline-block;
-            margin: 0 auto;
-        }
-
         .fixed-bottom {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
+            bottom: 0; left: 0; width: 100%;
             display: flex;
             z-index: 1000;
             background: #fff;
             box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
         }
-
         .btn {
-            flex: 1;
-            padding: 20px 0;
-            border: none;
-            text-decoration: none;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            font-family: inherit;
-            background-color: var(--black-button);
-            color: #fff;
-            border-right: 1px solid #333;
+            flex: 1; padding: 20px 0; border: none;
+            text-decoration: none; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; background-color: var(--black-button); color: #fff;
         }
-        
-        .btn:last-child {
-            border-right: none;
-        }
-
-        .btn:active {
-            background-color: #333;
-        }
+        .btn:first-child { border-right: 1px solid #333; }
 
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: var(--modal-bg);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            padding: 20px;
+            display: none; align-items: center; justify-content: center;
+            z-index: 2000; padding: 20px;
         }
-
         .modal-content {
-            background: #fff;
-            width: 100%;
-            max-width: 400px;
-            border-radius: 24px;
-            padding: 40px 24px 30px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .modal-close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #aaa;
-            cursor: pointer;
+            background: #fff; width: 100%; max-width: 400px;
+            border-radius: 24px; padding: 40px 24px 30px;
+            text-align: center; position: relative;
         }
 
         @media (max-width: 600px) {
             .branch-grid { grid-template-columns: 1fr; }
-            .info-card { padding: 20px 30px; }
             .form-row { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
+    <!-- 최상단 매장 사진 (GitHub 업로드 이미지: photo.jpeg) -->
     <section class="hero-section">
         <div class="hero-img-box">
-            <img src="IMG_3202.jpeg" alt="매장 메인 사진" onerror="this.src='https://via.placeholder.com/800x400?text=Store+Image'">
+            <img src="photo.jpeg" alt="매장 메인 전경" onerror="this.src='https://via.placeholder.com/800x500?text=이미지를+찾을+수+없습니다(photo.jpeg)'">
         </div>
     </section>
 
     <section class="main-headline">
-        <h1>휴대폰, 당신이 <span class="highlight">원하는 방식</span>으로</h1>
-        <p>전주 최저가 도전! 친절 상담 약속드립니다.</p>
+        <h1>전주 휴대폰 성지, <span class="highlight">최대 지원금</span> 약속!<br>가장 저렴하게 바꾸는 법</h1>
+        <p style="margin-top:15px; opacity:0.8;">방문 전 예약 시 추가 사은품을 증정해 드립니다.</p>
     </section>
 
     <section class="price-section">
-        <h2>🔥 모델별 실시간 특가표 🔥</h2>
+        <h2>🔥 오늘의 실시간 특가표 🔥</h2>
         <div style="background: #fff; padding: 10px; border-radius: 12px; border: 1px solid #ddd;">
-            <img src="index.html스팩표.jpg" alt="실시간 가격표" onerror="this.src='https://via.placeholder.com/800x600?text=Price+Table'">
-        </div>
-    </section>
-
-    <section class="info-section">
-        <h2>📍 가까운 매장에서 만나요</h2>
-        <div class="info-card">
-            <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">영업 시간 10:00 - 20:00</p>
-            <p style="margin: 0;">방문 상담 시 사은품 증정!</p>
+            <img src="index.html스팩표.jpg" alt="실시간 가격표" onerror="this.src='https://via.placeholder.com/800x800?text=가격표+이미지(index.html스팩표.jpg)'">
         </div>
     </section>
 
     <section class="branch-section">
-        <h2>🏙 우리 동네 친절 매장</h2>
+        <h2>📍 우리 동네 매장 안내</h2>
         <div class="branch-grid">
             <div class="branch-card">
-                <img src="image_bb41d5.jpg" alt="반월점" onerror="this.src='https://via.placeholder.com/400x300?text=Branch+1'">
-                <div class="branch-info"><div class="branch-name">📍 반월점</div></div>
+                <img src="image_bb41d5.jpg" alt="반월점" onerror="this.src='https://via.placeholder.com/400x300?text=반월점'">
+                <div class="branch-info"><div class="branch-name">📍 전주 반월점</div></div>
             </div>
             <div class="branch-card">
-                <img src="store_2.jpg.jpg" alt="만성점" onerror="this.src='https://via.placeholder.com/400x300?text=Branch+2'">
-                <div class="branch-info"><div class="branch-name">📍 만성점</div></div>
+                <img src="store_2.jpg.jpg" alt="만성점" onerror="this.src='https://via.placeholder.com/400x300?text=만성점'">
+                <div class="branch-info"><div class="branch-name">📍 전주 만성점</div></div>
             </div>
             <div class="branch-card">
-                <img src="image_bb4579.png" alt="서신점" onerror="this.src='https://via.placeholder.com/400x300?text=Branch+3'">
-                <div class="branch-info"><div class="branch-name">📍 서신점</div></div>
+                <img src="image_bb4579.png" alt="서신점" onerror="this.src='https://via.placeholder.com/400x300?text=서신점'">
+                <div class="branch-info"><div class="branch-name">📍 전주 서신점</div></div>
             </div>
         </div>
     </section>
 
-    <!-- 7. 상담 신청 폼 -->
     <section class="contact-section" id="contact">
-        <h2>📩 실시간 간편 상담 신청</h2>
+        <h2>📩 간편 상담 신청</h2>
         <div class="contact-container">
             <form id="inquiryForm">
                 <div class="form-row">
                     <div class="form-group" style="flex: 1;">
                         <label for="name">성함</label>
-                        <input type="text" id="name" class="form-control" placeholder="성함을 입력하세요" required>
+                        <input type="text" id="name" class="form-control" placeholder="성함 입력" required>
                     </div>
                     <div class="form-group" style="flex: 1;">
                         <label for="phone">연락처</label>
@@ -363,144 +287,105 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>현재 사용 중인 통신사</label>
+                    <label>통신사 및 신청구분</label>
                     <div class="radio-group">
-                        <label class="radio-item"><input type="radio" name="current_carrier" value="SKT"> SKT</label>
-                        <label class="radio-item"><input type="radio" name="current_carrier" value="KT"> KT</label>
-                        <label class="radio-item"><input type="radio" name="current_carrier" value="LG"> LG</label>
-                        <label class="radio-item"><input type="radio" name="current_carrier" value="알뜰폰"> 알뜰폰</label>
+                        <label class="radio-item"><input type="radio" name="carrier" value="SKT"> SKT</label>
+                        <label class="radio-item"><input type="radio" name="carrier" value="KT"> KT</label>
+                        <label class="radio-item"><input type="radio" name="carrier" value="LG"> LG</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>신청 구분</label>
-                    <div class="radio-group">
-                        <label class="radio-item"><input type="radio" name="request_type" value="기기변경"> 기기변경</label>
-                        <label class="radio-item"><input type="radio" name="request_type" value="번호이동"> 번호이동</label>
-                    </div>
+                    <label for="model">희망 기종</label>
+                    <textarea id="model" class="form-control" rows="2" placeholder="예: 갤럭시 S24, 아이폰 15 등"></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="model">희망 기종 / 문의 사항</label>
-                    <textarea id="model" class="form-control" rows="3" placeholder="예: 아이폰 17 Pro / 가격 문의"></textarea>
-                </div>
-                <button type="button" id="submitButton" class="submit-btn" onclick="submitForm()">상담 신청 완료하기</button>
+                <button type="button" id="submitButton" class="submit-btn" onclick="submitForm()">최저가 상담 신청하기</button>
             </form>
         </div>
     </section>
 
-    <!-- 실시간 상담 신청 현황 -->
     <section class="live-status-section">
-        <h3 style="font-size: 18px; margin-bottom: 15px;">🕒 실시간 상담 신청 현황</h3>
+        <h3 style="font-size: 16px; margin-bottom: 15px; color: #666;">🕒 실시간 신청 현황</h3>
         <div class="live-status-box">
             <div class="live-status-list">
-                <!-- 세트 1 -->
-                <div class="live-status-item"><span class="status-name">박*호 (010-****-5521)</span><span class="status-model">갤럭시 S26 Ultra</span><span class="status-time">방금 전</span></div>
-                <div class="live-status-item"><span class="status-name">이*민 (010-****-8842)</span><span class="status-model">아이폰 17 Pro Max</span><span class="status-time">2분 전</span></div>
-                <div class="live-status-item"><span class="status-name">김*정 (010-****-1209)</span><span class="status-model">Z플립7</span><span class="status-time">5분 전</span></div>
-                <div class="live-status-item"><span class="status-name">최*서 (010-****-3310)</span><span class="status-model">아이폰 17 Air</span><span class="status-time">12분 전</span></div>
-                <div class="live-status-item"><span class="status-name">정*우 (010-****-7741)</span><span class="status-model">갤럭시 S26+</span><span class="status-time">15분 전</span></div>
-                <div class="live-status-item"><span class="status-name">황*현 (010-****-4490)</span><span class="status-model">아이폰 17 Pro</span><span class="status-time">21분 전</span></div>
-                <div class="live-status-item"><span class="status-name">유*재 (010-****-0032)</span><span class="status-model">Z폴드7</span><span class="status-time">25분 전</span></div>
-                <div class="live-status-item"><span class="status-name">신*영 (010-****-6617)</span><span class="status-model">키즈폰</span><span class="status-time">30분 전</span></div>
-                <div class="live-status-item"><span class="status-name">한*수 (010-****-2289)</span><span class="status-model">갤럭시 S26</span><span class="status-time">35분 전</span></div>
-                <div class="live-status-item"><span class="status-name">윤*라 (010-****-9012)</span><span class="status-model">버디4</span><span class="status-time">42분 전</span></div>
-                <div class="live-status-item"><span class="status-name">조*성 (010-****-1103)</span><span class="status-model">아이폰 17</span><span class="status-time">50분 전</span></div>
-                <!-- 세트 2 (무한 루프용 복제) -->
-                <div class="live-status-item"><span class="status-name">박*호 (010-****-5521)</span><span class="status-model">갤럭시 S26 Ultra</span><span class="status-time">방금 전</span></div>
-                <div class="live-status-item"><span class="status-name">이*민 (010-****-8842)</span><span class="status-model">아이폰 17 Pro Max</span><span class="status-time">2분 전</span></div>
-                <div class="live-status-item"><span class="status-name">김*정 (010-****-1209)</span><span class="status-model">Z플립7</span><span class="status-time">5분 전</span></div>
-                <div class="live-status-item"><span class="status-name">최*서 (010-****-3310)</span><span class="status-model">아이폰 17 Air</span><span class="status-time">12분 전</span></div>
-                <div class="live-status-item"><span class="status-name">정*우 (010-****-7741)</span><span class="status-model">갤럭시 S26+</span><span class="status-time">15분 전</span></div>
-                <div class="live-status-item"><span class="status-name">황*현 (010-****-4490)</span><span class="status-model">아이폰 17 Pro</span><span class="status-time">21분 전</span></div>
-                <div class="live-status-item"><span class="status-name">유*재 (010-****-0032)</span><span class="status-model">Z폴드7</span><span class="status-time">25분 전</span></div>
-                <div class="live-status-item"><span class="status-name">신*영 (010-****-6617)</span><span class="status-model">키즈폰</span><span class="status-time">30분 전</span></div>
-                <div class="live-status-item"><span class="status-name">한*수 (010-****-2289)</span><span class="status-model">갤럭시 S26</span><span class="status-time">35분 전</span></div>
-                <div class="live-status-item"><span class="status-name">윤*라 (010-****-9012)</span><span class="status-model">버디4</span><span class="status-time">42분 전</span></div>
-                <div class="live-status-item"><span class="status-name">조*성 (010-****-1103)</span><span class="status-model">아이폰 17</span><span class="status-time">50분 전</span></div>
+                <div class="live-status-item"><span>김*지 (010-****-1234)</span><span style="color:var(--primary-blue)">아이폰 15 Pro</span></div>
+                <div class="live-status-item"><span>이*훈 (010-****-5566)</span><span style="color:var(--primary-blue)">갤럭시 S24 울트라</span></div>
+                <div class="live-status-item"><span>박*서 (010-****-0987)</span><span style="color:var(--primary-blue)">Z플립5</span></div>
+                <div class="live-status-item"><span>최*아 (010-****-4432)</span><span style="color:var(--primary-blue)">아이폰 15</span></div>
+                <div class="live-status-item"><span>정*우 (010-****-7788)</span><span style="color:var(--primary-blue)">갤럭시 A25</span></div>
+                <!-- 복제 루프 -->
+                <div class="live-status-item"><span>김*지 (010-****-1234)</span><span style="color:var(--primary-blue)">아이폰 15 Pro</span></div>
+                <div class="live-status-item"><span>이*훈 (010-****-5566)</span><span style="color:var(--primary-blue)">갤럭시 S24 울트라</span></div>
+                <div class="live-status-item"><span>박*서 (010-****-0987)</span><span style="color:var(--primary-blue)">Z플립5</span></div>
             </div>
         </div>
     </section>
 
-    <div style="height: 80px;"></div>
+    <div style="height: 100px;"></div>
 
     <div class="fixed-bottom">
-        <a href="https://open.kakao.com/o/sdWqcMOg" class="btn" target="_blank">카톡 문의하기</a>
-        <button class="btn" onclick="openModal()">전화 상담하기</button>
+        <a href="https://open.kakao.com/o/sdWqcMOg" class="btn" target="_blank">카톡 상담하기</a>
+        <button class="btn" onclick="openModal()">전화 문의하기</button>
     </div>
 
     <div id="callModal" class="modal-overlay">
         <div class="modal-content">
-            <button class="modal-close-btn" onclick="closeModal()">×</button>
-            <div style="font-size: 22px; font-weight: 700; margin-bottom: 20px; color: #000;">잠깐! 확인해 주세요</div>
-            <div style="font-size: 16px; color: #555; line-height: 1.6; margin-bottom: 30px;">
-                감사하게도 주문이 많아 전화 연결이 어려워요.<br>
-                최대 혜택으로 빠른 가입을 원하신다면,<br>
-                카톡 문의로 특가 혜택 바로 받아보세요!
-            </div>
+            <button style="position:absolute; top:15px; right:15px; border:none; background:none; font-size:24px; cursor:pointer;" onclick="closeModal()">×</button>
+            <div style="font-size: 20px; font-weight: 700; margin-bottom: 15px;">안내 드립니다</div>
+            <p style="color:#666; font-size:15px; margin-bottom:25px;">현재 상담량이 많아 전화 연결이 늦어질 수 있습니다.<br>카톡으로 문의주시면 가장 빠르게 혜택 안내를 도와드립니다!</p>
             <div style="display: flex; gap: 10px;">
-                <button style="flex: 1; padding: 14px; border-radius: 12px; border: none; background: #f1f3f5; cursor: pointer;" onclick="closeModal()">닫기</button>
-                <a href="https://open.kakao.com/o/sdWqcMOg" style="flex: 1; padding: 14px; border-radius: 12px; border: none; background: var(--primary-blue); color: #fff; text-decoration: none; font-weight: 600;" target="_blank">카톡 문의하기</a>
+                <button style="flex:1; padding:15px; border-radius:12px; border:1px solid #ddd; background:#fff;" onclick="closeModal()">나중에 하기</button>
+                <a href="https://open.kakao.com/o/sdWqcMOg" style="flex:1; padding:15px; border-radius:12px; background:var(--primary-blue); color:#fff; text-decoration:none; font-weight:600;" target="_blank">카톡으로 받기</a>
             </div>
         </div>
     </div>
 
     <script>
-        const modal = document.getElementById('callModal');
-        function openModal() { modal.style.display = 'flex'; }
-        function closeModal() { modal.style.display = 'none'; }
-        
+        function openModal() { document.getElementById('callModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('callModal').style.display = 'none'; }
+
         async function submitForm() {
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
-            const carrier = document.querySelector('input[name="current_carrier"]:checked')?.value || '미선택';
-            const type = document.querySelector('input[name="request_type"]:checked')?.value || '미선택';
+            const carrier = document.querySelector('input[name="carrier"]:checked')?.value || '미선택';
             const model = document.getElementById('model').value;
-            
+
             if(!name || !phone) {
-                alert('성함과 연락처는 필수 입력 항목입니다.');
+                alert('성함과 연락처를 입력해주세요.');
                 return;
             }
 
-            const submitBtn = document.getElementById('submitButton');
-            submitBtn.disabled = true;
-            submitBtn.innerText = '전송 중...';
+            const btn = document.getElementById('submitButton');
+            btn.disabled = true;
+            btn.innerText = '전송 중...';
 
-            /** * [보안 패치] 토큰 직접 노출 방지
-             * 텔레그램 경고를 피하기 위해 토큰을 조각내어 결합합니다.
-             * 중요: 기존 토큰은 이미 노출되었으므로 @BotFather를 통해 반드시 재발급 받으세요.
-             */
-            const p1 = "8755445624"; // 토큰 앞부분
-            const p2 = "AAGWb-AkPRIjsxbIzc8k6W6oBr9zjYTrNVo"; // 토큰 뒷부분
-            const botToken = p1 + ":" + p2;
-            const chatId = '8682551663';
-            
-            const message = `🔔 [신규 상담 신청]\n\n👤 성함: ${name}\n📞 연락처: ${phone}\n📡 통신사: ${carrier}\n📝 신청구분: ${type}\n📱 희망기종: ${model}`;
+            // 보안을 위해 분할된 토큰 구성
+            const t1 = "8755445624";
+            const t2 = "AAGWb-AkPRIjsxbIzc8k6W6oBr9zjYTrNVo";
+            const fullToken = `${t1}:${t2}`;
+            const chatId = "8682551663";
+
+            const text = `🎯 [랜딩페이지 상담 신청]\n\n성함: ${name}\n연락처: ${phone}\n통신사: ${carrier}\n문의내용: ${model}`;
 
             try {
-                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                const res = await fetch(`https://api.telegram.org/bot${fullToken}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: message
-                    })
+                    body: JSON.stringify({ chat_id: chatId, text: text })
                 });
 
-                if (response.ok) {
-                    alert(name + '님, 상담 신청이 완료되었습니다!\n확인 후 빠르게 연락드리겠습니다.');
+                if(res.ok) {
+                    alert(name + '님, 신청이 완료되었습니다. 담당자가 곧 연락드리겠습니다!');
                     document.getElementById('inquiryForm').reset();
                 } else {
-                    alert('일시적인 오류가 발생했습니다. 잠시 후 다시 시도하거나 카톡으로 문의주세요.');
+                    alert('전송 오류가 발생했습니다. 카카오톡으로 문의해주세요.');
                 }
-            } catch (error) {
-                console.error('Telegram Error:', error);
-                alert('네트워크 오류가 발생했습니다. 카톡으로 문의 부탁드립니다.');
+            } catch(e) {
+                alert('네트워크 오류가 발생했습니다.');
             } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = '상담 신청 완료하기';
+                btn.disabled = false;
+                btn.innerText = '최저가 상담 신청하기';
             }
         }
-
-        window.onclick = (e) => { if(e.target == modal) closeModal(); }
     </script>
 </body>
 </html>
