@@ -45,7 +45,7 @@
             margin-bottom: 20px;
         }
 
-        /* 히어로 섹션 - GitHub 업로드 이미지 적용 */
+        /* 히어로 섹션 */
         .hero-section {
             padding: 0;
             position: relative;
@@ -61,7 +61,7 @@
             border-radius: 0;
             width: 100%;
             max-height: 700px;
-            object-fit: contain; /* 이미지 전체 비율 유지 */
+            object-fit: contain;
             margin: 0 auto;
         }
 
@@ -176,36 +176,6 @@
         }
         .submit-btn:hover { background-color: #0056b3; }
 
-        /* 실시간 현황 애니메이션 */
-        .live-status-box {
-            max-width: 500px;
-            margin: 0 auto;
-            background: #fafafa;
-            border-radius: 15px;
-            padding: 0 15px;
-            overflow: hidden;
-            height: 300px;
-            position: relative;
-            border: 1px solid #eee;
-        }
-        .live-status-list {
-            position: absolute;
-            width: calc(100% - 30px);
-            animation: infiniteSlideUp 25s linear infinite;
-        }
-        .live-status-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px dashed #ddd;
-            font-size: 14px;
-        }
-        @keyframes infiniteSlideUp {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
-        }
-
         .fixed-bottom {
             position: fixed;
             bottom: 0; left: 0; width: 100%;
@@ -243,12 +213,11 @@
 </head>
 <body>
 
-    <!-- 최상단 매장 사진 (photo.jpeg) -->
+    <!-- 최상단 매장 사진 (확장자 및 대소문자 예외 처리 강화) -->
     <section class="hero-section">
         <div class="hero-img-box">
-            <!-- 파일명이 PHOTO.JPEG나 photo.jpg일 경우도 대비해 onerror 핸들링 추가 -->
             <img id="main-photo" src="photo.jpeg" alt="매장 메인 전경" 
-                 onerror="this.onerror=null; this.src='photo.jpg';">
+                 onerror="handleImageError(this)">
         </div>
     </section>
 
@@ -260,8 +229,8 @@
     <section class="price-section">
         <h2>🔥 오늘의 실시간 특가표 🔥</h2>
         <div style="background: #fff; padding: 10px; border-radius: 12px; border: 1px solid #ddd;">
-            <!-- 공백이나 특수문자가 포함된 파일명은 URL 인코딩 적용 권장 -->
-            <img src="index.html%EC%8A%A4%ED%8C%A9%ED%91%9C.jpg" alt="실시간 가격표" onerror="this.src='https://via.placeholder.com/800x800?text=가격표+이미지+확인필요'">
+            <img src="index.html%EC%8A%A4%ED%8C%A9%ED%91%9C.jpg" alt="실시간 가격표" 
+                 onerror="this.src='https://via.placeholder.com/800x800?text=스팩표+이미지+파일명+확인필요'">
         </div>
     </section>
 
@@ -334,6 +303,31 @@
     </div>
 
     <script>
+        // 이미지 로딩 실패 시 다른 확장자나 대소문자로 시도하는 함수
+        function handleImageError(image) {
+            const fallbackSources = [
+                'photo.jpg',
+                'PHOTO.JPEG',
+                'PHOTO.JPG',
+                'photo.png'
+            ];
+            
+            // 이미 시도했던 소스인지 확인하기 위한 인덱스 저장
+            if (!image.dataset.errorCount) image.dataset.errorCount = 0;
+            let count = parseInt(image.dataset.errorCount);
+            
+            if (count < fallbackSources.length) {
+                const nextSrc = fallbackSources[count];
+                image.dataset.errorCount = count + 1;
+                console.log('Trying fallback image:', nextSrc);
+                image.src = nextSrc;
+            } else {
+                // 모든 시도가 실패하면 플레이스홀더 표시
+                image.onerror = null;
+                image.src = 'https://via.placeholder.com/800x500?text=photo.jpeg+이미지를+찾을+수+없음';
+            }
+        }
+
         function openModal() { document.getElementById('callModal').style.display = 'flex'; }
         function closeModal() { document.getElementById('callModal').style.display = 'none'; }
 
