@@ -93,6 +93,15 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             text-align: left;
+            transition: transform 0.2s;
+        }
+        .branch-card:hover {
+            transform: translateY(-5px);
+        }
+        .branch-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
         .branch-card img {
             width: 100%;
@@ -251,6 +260,7 @@
             text-decoration: none; font-weight: 700;
             display: flex; align-items: center; justify-content: center;
             font-size: 16px; background-color: var(--black-button); color: #fff;
+            cursor: pointer;
         }
         .btn:first-child { border-right: 1px solid #333; }
 
@@ -301,20 +311,16 @@
         </div>
     </section>
 
-    <!-- 새로 추가된 고객 리뷰 섹션 -->
     <section class="review-section">
         <h2>⭐ 실제 고객 후기 ⭐</h2>
         <div class="review-grid">
             <div class="review-card">
-                <!-- 첫 번째 리뷰 사진 연결 -->
                 <img src="리뷰1.jpeg" alt="고객 리뷰 1" onerror="this.src='https://placehold.co/400x500?text=Review+1'">
             </div>
             <div class="review-card">
-                <!-- 두 번째 리뷰 사진 연결 -->
                 <img src="리뷰2.jpeg" alt="고객 리뷰 2" onerror="this.src='https://placehold.co/400x500?text=Review+2'">
             </div>
             <div class="review-card">
-                <!-- 세 번째 리뷰 사진 연결 -->
                 <img src="리뷰3.jpeg" alt="고객 리뷰 3" onerror="this.src='https://placehold.co/400x500?text=Review+3'">
             </div>
         </div>
@@ -324,14 +330,18 @@
         <h2>📍 우리 동네 매장 안내</h2>
         <div class="branch-grid">
             <div class="branch-card">
-                <!-- 반월점 사진 파일명 수정 -->
-                <img src="반월점.jpeg" alt="반월점" onerror="this.src='https://placehold.co/400x300?text=Store'">
-                <div class="branch-info"><div class="branch-name">📍 전주 반월점</div></div>
+                <!-- 반월점 네이버 지도 연결 -->
+                <a href="https://map.naver.com/p/entry/place/1159387826?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.0722085&lat=35.8737057" target="_blank">
+                    <img src="반월점.jpeg" alt="반월점" onerror="this.src='https://placehold.co/400x300?text=Store'">
+                    <div class="branch-info"><div class="branch-name">📍 전주 반월점</div></div>
+                </a>
             </div>
             <div class="branch-card">
-                <!-- 만성점 사진 파일명 수정 -->
-                <img src="만성점.jpeg" alt="만성점" onerror="this.src='https://placehold.co/400x300?text=Store'">
-                <div class="branch-info"><div class="branch-name">📍 전주 만성점</div></div>
+                <!-- 만성점 네이버 지도 연결 (검색 결과) -->
+                <a href="https://map.naver.com/v5/search/LG%EC%9C%A0%ED%94%8C%EB%9F%AC%EC%8A%A4%20%EB%A7%8C%EC%84%B1%EB%8F%99%20%EB%A7%8C%EC%84%B1%EC%A4%91%EC%95%99%EB%A1%9C%EC%A0%90" target="_blank">
+                    <img src="만성점.jpeg" alt="만성점" onerror="this.src='https://placehold.co/400x300?text=Store'">
+                    <div class="branch-info"><div class="branch-name">📍 전주 만성점</div></div>
+                </a>
             </div>
             <div class="branch-card">
                 <img src="image_bb4579.png" alt="서신점" onerror="this.src='https://placehold.co/400x300?text=Store'">
@@ -376,9 +386,7 @@
         <div class="status-container">
             <div class="status-header">실시간 상담 신청 현황</div>
             <div class="status-list-wrapper">
-                <div id="statusList" class="status-list">
-                    <!-- 데이터는 스크립트에서 자동 생성 -->
-                </div>
+                <div id="statusList" class="status-list"></div>
             </div>
         </div>
         <p style="font-size: 12px; color: #999; margin-top: 15px;">* 실시간 정보는 개인정보 보호를 위해 마스킹 처리되었습니다.</p>
@@ -391,7 +399,6 @@
         <button class="btn" onclick="openModal()">전화 문의하기</button>
     </div>
 
-    <!-- 모달 창 문구 및 버튼 수정 -->
     <div id="callModal" class="modal-overlay">
         <div class="modal-content">
             <button style="position:absolute; top:15px; right:15px; border:none; background:none; font-size:24px; cursor:pointer;" onclick="closeModal()">×</button>
@@ -399,7 +406,6 @@
             <p style="color:#666; font-size:15px; margin-bottom:25px; line-height: 1.5;">감사하게도 주문이 많아 전화 연결이 어려워요.<br>최대 혜택으로 빠른 가입을 원하신다면,<br>셀프가입으로 상담 없이 특가 혜택 바로 받아보세요!</p>
             <div style="display: flex; gap: 10px;">
                 <button style="flex:1; padding:15px; border-radius:12px; border:1px solid #ddd; background:#fff; font-weight: 600;" onclick="closeModal()">닫기</button>
-                <!-- 버튼 명칭 수정 -->
                 <a href="https://open.kakao.com/o/sdWqcMOg" style="flex:1.5; padding:15px; border-radius:12px; background:var(--primary-blue); color:#fff; text-decoration:none; font-weight:600; display: flex; align-items: center; justify-content: center;" target="_blank">카톡 상담하기</a>
             </div>
         </div>
@@ -410,7 +416,6 @@
         const lastNames = ["*현", "*준", "*서", "*우", "*진", "*아", "*미", "*영", "*훈", "*희"];
         const phones = ["010-****-1234", "010-****-5678", "010-****-9921", "010-****-4432", "010-****-0012", "010-****-7712", "010-****-3388"];
         
-        // 요청하신 모델 리스트로 업데이트
         const phoneModels = [
             "갤럭시 S26 울트라", "갤럭시 S26+", "갤럭시 S26", 
             "아이폰 17 Pro Max", "아이폰 17 Pro", "아이폰 17",
@@ -418,12 +423,10 @@
         ];
         
         const types = ["번호이동", "기기변경", "상담예약", "방문예약"];
-        // 요청에 따라 '방금전'을 제외하고 1분전부터 시작하도록 수정
         const times = ["1분전", "2분전", "3분전", "5분전", "8분전", "12분전", "15분전"];
 
         const list = document.getElementById('statusList');
         
-        // 초기 데이터 10개 생성
         for(let i=0; i<10; i++) {
             createItem(false);
         }
@@ -467,7 +470,6 @@
                 const phone = phones[Math.floor(Math.random() * phones.length)];
                 const model = phoneModels[Math.floor(Math.random() * phoneModels.length)];
                 const type = types[Math.floor(Math.random() * types.length)];
-                // 롤링 시 새롭게 들어오는 데이터는 '1분전'으로 표시
                 const time = "1분전"; 
                 
                 first.innerHTML = `
@@ -517,7 +519,6 @@
             const t2 = "AAGWb-AkPRIjsxbIzc8k6W6oBr9zjYTrNVo";
             const fullToken = `${t1}:${t2}`;
             const chatId = "8682551663";
-
             const text = `🎯 [랜딩페이지 상담 신청]\n\n성함: ${name}\n연락처: ${phone}\n통신사: ${carrier}\n문의내용: ${model}`;
 
             try {
