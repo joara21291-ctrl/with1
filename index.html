@@ -50,7 +50,6 @@
             padding: 0;
             position: relative;
             background-color: #f8f9fa;
-            min-height: 100px;
         }
         .hero-img-box {
             width: 100%;
@@ -147,19 +146,6 @@
             display: flex;
             gap: 10px;
         }
-        .radio-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 5px;
-            flex-wrap: wrap;
-        }
-        .radio-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
         
         .submit-btn {
             width: 100%;
@@ -174,7 +160,6 @@
             margin-top: 10px;
             transition: background 0.3s;
         }
-        .submit-btn:hover { background-color: #0056b3; }
 
         /* 실시간 예약 현황 스타일 */
         .status-section {
@@ -196,20 +181,27 @@
             font-size: 14px;
             font-weight: 600;
         }
-        .status-list {
-            height: 200px;
+        .status-list-wrapper {
+            height: 240px;
             overflow: hidden;
             position: relative;
-            background: #fff;
+        }
+        .status-list {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            transition: top 0.5s ease-in-out;
         }
         .status-item {
-            padding: 12px 15px;
+            padding: 15px;
             border-bottom: 1px solid #f8f8f8;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
-            animation: slideUp 0.5s ease-out;
+            font-size: 14px;
+            height: 48px;
+            box-sizing: border-box;
+            background: #fff;
         }
         .status-item .name { font-weight: 600; color: #333; }
         .status-item .phone { color: #888; }
@@ -220,10 +212,6 @@
             border-radius: 4px;
             font-size: 11px;
             font-weight: 700;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .fixed-bottom {
@@ -240,6 +228,7 @@
             display: flex; align-items: center; justify-content: center;
             font-size: 16px; background-color: var(--black-button); color: #fff;
         }
+        /* 첫 번째 버튼 경계선 추가 */
         .btn:first-child { border-right: 1px solid #333; }
 
         .modal-overlay {
@@ -263,11 +252,9 @@
 </head>
 <body>
 
-    <!-- 최상단 매장 사진 -->
     <section class="hero-section">
         <div class="hero-img-box">
-            <img id="main-photo" src="photo.jpeg" alt="매장 메인 전경" 
-                 onerror="handleImageError(this)">
+            <img id="main-photo" src="photo.jpeg" alt="매장 메인 전경" onerror="handleImageError(this)">
         </div>
     </section>
 
@@ -318,10 +305,10 @@
                 </div>
                 <div class="form-group">
                     <label>통신사 및 신청구분</label>
-                    <div class="radio-group">
-                        <label class="radio-item"><input type="radio" name="carrier" value="SKT"> SKT</label>
-                        <label class="radio-item"><input type="radio" name="carrier" value="KT"> KT</label>
-                        <label class="radio-item"><input type="radio" name="carrier" value="LG"> LG</label>
+                    <div style="display: flex; gap: 15px; margin-top: 5px;">
+                        <label style="font-size: 14px; cursor: pointer;"><input type="radio" name="carrier" value="SKT"> SKT</label>
+                        <label style="font-size: 14px; cursor: pointer;"><input type="radio" name="carrier" value="KT"> KT</label>
+                        <label style="font-size: 14px; cursor: pointer;"><input type="radio" name="carrier" value="LG"> LG</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -333,13 +320,14 @@
         </div>
     </section>
 
-    <!-- 실시간 예약 현황 섹션 (재추가) -->
     <section class="status-section">
         <h2>📊 실시간 예약/상담 현황</h2>
         <div class="status-container">
             <div class="status-header">실시간 접수 목록 (방금 전)</div>
-            <div id="statusList" class="status-list">
-                <!-- 자바스크립트로 항목 추가됨 -->
+            <div class="status-list-wrapper">
+                <div id="statusList" class="status-list">
+                    <!-- 초기 리스트가 스크립트로 생성됩니다 -->
+                </div>
             </div>
         </div>
         <p style="font-size: 12px; color: #999; margin-top: 15px;">* 개인정보 보호를 위해 성함과 번호 일부를 마스킹 처리하였습니다.</p>
@@ -348,6 +336,7 @@
     <div style="height: 100px;"></div>
 
     <div class="fixed-bottom">
+        <!-- 카톡 상담하기 버튼 색상을 다시 검은색 테마로 원복하였습니다 -->
         <a href="https://open.kakao.com/o/sdWqcMOg" class="btn" target="_blank">카톡 상담하기</a>
         <button class="btn" onclick="openModal()">전화 문의하기</button>
     </div>
@@ -359,20 +348,24 @@
             <p style="color:#666; font-size:15px; margin-bottom:25px;">현재 상담량이 많아 전화 연결이 늦어질 수 있습니다.<br>카톡으로 문의주시면 가장 빠르게 혜택 안내를 도와드립니다!</p>
             <div style="display: flex; gap: 10px;">
                 <button style="flex:1; padding:15px; border-radius:12px; border:1px solid #ddd; background:#fff;" onclick="closeModal()">나중에 하기</button>
-                <a href="https://open.kakao.com/o/sdWqcMOg" style="flex:1; padding:15px; border-radius:12px; background:var(--primary-blue); color:#fff; text-decoration:none; font-weight:600;" target="_blank">카톡으로 받기</a>
+                <a href="https://open.kakao.com/o/sdWqcMOg" style="flex:1; padding:15px; border-radius:12px; background:var(--primary-blue); color:#fff; text-decoration:none; font-weight:600; display: flex; align-items: center; justify-content: center;" target="_blank">카톡으로 받기</a>
             </div>
         </div>
     </div>
 
     <script>
-        // 실시간 예약 현황 데이터 시뮬레이션
         const firstNames = ["김", "이", "박", "최", "정", "강", "조", "윤", "장", "임"];
         const lastNames = ["*현", "*준", "*서", "*우", "*진", "*아", "*미", "*영", "*훈", "*희"];
         const phones = ["010-****-1234", "010-****-5678", "010-****-9921", "010-****-4432", "010-****-0012"];
         const types = ["신규가입", "번호이동", "기기변경", "상담예약", "방문예약"];
 
-        function addStatusItem() {
-            const list = document.getElementById('statusList');
+        const list = document.getElementById('statusList');
+        
+        for(let i=0; i<8; i++) {
+            createItem();
+        }
+
+        function createItem() {
             const name = firstNames[Math.floor(Math.random() * 10)] + lastNames[Math.floor(Math.random() * 10)];
             const phone = phones[Math.floor(Math.random() * 5)];
             const type = types[Math.floor(Math.random() * 5)];
@@ -384,36 +377,43 @@
                 <span class="phone">${phone}</span>
                 <span class="badge">${type}</span>
             `;
-            
-            list.prepend(item);
-            
-            if (list.children.length > 6) {
-                list.removeChild(list.lastChild);
-            }
+            list.appendChild(item);
         }
 
-        // 초기 아이템 생성 및 주기적 업데이트
-        setInterval(addStatusItem, 3000);
-        for(let i=0; i<5; i++) addStatusItem();
+        function startRolling() {
+            const itemHeight = 48;
+            list.style.transition = 'top 0.5s ease-in-out';
+            list.style.top = `-${itemHeight}px`;
+
+            setTimeout(() => {
+                const first = list.firstElementChild;
+                list.appendChild(first);
+                list.style.transition = 'none';
+                list.style.top = '0';
+                
+                const name = firstNames[Math.floor(Math.random() * 10)] + lastNames[Math.floor(Math.random() * 10)];
+                const phone = phones[Math.floor(Math.random() * 5)];
+                const type = types[Math.floor(Math.random() * 5)];
+                first.innerHTML = `
+                    <span class="name">${name}</span>
+                    <span class="phone">${phone}</span>
+                    <span class="badge">${type}</span>
+                `;
+            }, 500);
+        }
+
+        setInterval(startRolling, 3000);
 
         function handleImageError(image) {
-            const fallbackSources = [
-                'photo.jpg',
-                'PHOTO.JPEG',
-                'PHOTO.JPG',
-                'photo.png'
-            ];
-            
+            const fallbackSources = ['photo.jpg', 'PHOTO.JPEG', 'photo.png'];
             if (!image.dataset.errorCount) image.dataset.errorCount = 0;
             let count = parseInt(image.dataset.errorCount);
-            
             if (count < fallbackSources.length) {
-                const nextSrc = fallbackSources[count];
                 image.dataset.errorCount = count + 1;
-                image.src = nextSrc;
+                image.src = fallbackSources[count];
             } else {
                 image.onerror = null;
-                image.src = 'https://via.placeholder.com/800x350?text=photo.jpeg+이미지를+찾을+수+없음';
+                image.src = 'https://via.placeholder.com/800x350?text=Store+Photo';
             }
         }
 
