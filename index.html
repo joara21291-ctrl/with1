@@ -45,16 +45,24 @@
             margin-bottom: 20px;
         }
 
-        /* 히어로 섹션 - 깃허브 업로드 사진 적용 */
+        /* 히어로 섹션 - GitHub 업로드 이미지 적용 */
         .hero-section {
             padding: 0;
             position: relative;
+            background-color: #f8f9fa;
+            min-height: 200px;
+        }
+        .hero-img-box {
+            width: 100%;
+            overflow: hidden;
+            background-color: #eee;
         }
         .hero-img-box img {
             border-radius: 0;
             width: 100%;
-            max-height: 550px;
-            object-fit: cover;
+            max-height: 700px;
+            object-fit: contain; /* 이미지 전체 비율 유지 */
+            margin: 0 auto;
         }
 
         .main-headline {
@@ -235,10 +243,12 @@
 </head>
 <body>
 
-    <!-- 최상단 매장 사진 (GitHub 업로드 이미지: photo.jpeg) -->
+    <!-- 최상단 매장 사진 (photo.jpeg) -->
     <section class="hero-section">
         <div class="hero-img-box">
-            <img src="photo.jpeg" alt="매장 메인 전경" onerror="this.src='https://via.placeholder.com/800x500?text=이미지를+찾을+수+없습니다(photo.jpeg)'">
+            <!-- 파일명이 PHOTO.JPEG나 photo.jpg일 경우도 대비해 onerror 핸들링 추가 -->
+            <img id="main-photo" src="photo.jpeg" alt="매장 메인 전경" 
+                 onerror="this.onerror=null; this.src='photo.jpg';">
         </div>
     </section>
 
@@ -250,7 +260,8 @@
     <section class="price-section">
         <h2>🔥 오늘의 실시간 특가표 🔥</h2>
         <div style="background: #fff; padding: 10px; border-radius: 12px; border: 1px solid #ddd;">
-            <img src="index.html스팩표.jpg" alt="실시간 가격표" onerror="this.src='https://via.placeholder.com/800x800?text=가격표+이미지(index.html스팩표.jpg)'">
+            <!-- 공백이나 특수문자가 포함된 파일명은 URL 인코딩 적용 권장 -->
+            <img src="index.html%EC%8A%A4%ED%8C%A9%ED%91%9C.jpg" alt="실시간 가격표" onerror="this.src='https://via.placeholder.com/800x800?text=가격표+이미지+확인필요'">
         </div>
     </section>
 
@@ -258,15 +269,15 @@
         <h2>📍 우리 동네 매장 안내</h2>
         <div class="branch-grid">
             <div class="branch-card">
-                <img src="image_bb41d5.jpg" alt="반월점" onerror="this.src='https://via.placeholder.com/400x300?text=반월점'">
+                <img src="image_bb41d5.jpg" alt="반월점" onerror="this.src='https://via.placeholder.com/400x300?text=Store'">
                 <div class="branch-info"><div class="branch-name">📍 전주 반월점</div></div>
             </div>
             <div class="branch-card">
-                <img src="store_2.jpg.jpg" alt="만성점" onerror="this.src='https://via.placeholder.com/400x300?text=만성점'">
+                <img src="store_2.jpg.jpg" alt="만성점" onerror="this.src='https://via.placeholder.com/400x300?text=Store'">
                 <div class="branch-info"><div class="branch-name">📍 전주 만성점</div></div>
             </div>
             <div class="branch-card">
-                <img src="image_bb4579.png" alt="서신점" onerror="this.src='https://via.placeholder.com/400x300?text=서신점'">
+                <img src="image_bb4579.png" alt="서신점" onerror="this.src='https://via.placeholder.com/400x300?text=Store'">
                 <div class="branch-info"><div class="branch-name">📍 전주 서신점</div></div>
             </div>
         </div>
@@ -300,23 +311,6 @@
                 </div>
                 <button type="button" id="submitButton" class="submit-btn" onclick="submitForm()">최저가 상담 신청하기</button>
             </form>
-        </div>
-    </section>
-
-    <section class="live-status-section">
-        <h3 style="font-size: 16px; margin-bottom: 15px; color: #666;">🕒 실시간 신청 현황</h3>
-        <div class="live-status-box">
-            <div class="live-status-list">
-                <div class="live-status-item"><span>김*지 (010-****-1234)</span><span style="color:var(--primary-blue)">아이폰 15 Pro</span></div>
-                <div class="live-status-item"><span>이*훈 (010-****-5566)</span><span style="color:var(--primary-blue)">갤럭시 S24 울트라</span></div>
-                <div class="live-status-item"><span>박*서 (010-****-0987)</span><span style="color:var(--primary-blue)">Z플립5</span></div>
-                <div class="live-status-item"><span>최*아 (010-****-4432)</span><span style="color:var(--primary-blue)">아이폰 15</span></div>
-                <div class="live-status-item"><span>정*우 (010-****-7788)</span><span style="color:var(--primary-blue)">갤럭시 A25</span></div>
-                <!-- 복제 루프 -->
-                <div class="live-status-item"><span>김*지 (010-****-1234)</span><span style="color:var(--primary-blue)">아이폰 15 Pro</span></div>
-                <div class="live-status-item"><span>이*훈 (010-****-5566)</span><span style="color:var(--primary-blue)">갤럭시 S24 울트라</span></div>
-                <div class="live-status-item"><span>박*서 (010-****-0987)</span><span style="color:var(--primary-blue)">Z플립5</span></div>
-            </div>
         </div>
     </section>
 
@@ -358,7 +352,6 @@
             btn.disabled = true;
             btn.innerText = '전송 중...';
 
-            // 보안을 위해 분할된 토큰 구성
             const t1 = "8755445624";
             const t2 = "AAGWb-AkPRIjsxbIzc8k6W6oBr9zjYTrNVo";
             const fullToken = `${t1}:${t2}`;
