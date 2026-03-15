@@ -110,23 +110,24 @@
             border-radius: 0;
         }
         .branch-info {
-            padding: 15px;
+            padding: 12px;
         }
         .branch-name {
             font-weight: 700;
-            font-size: 16px;
+            font-size: 15px;
             color: #333;
+            word-break: keep-all;
         }
 
-        /* 리뷰 섹션 */
+        /* 리뷰 섹션 - 가로 3개 유지 */
         .review-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 10px;
         }
         .review-card {
             background: #fff;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
             border: 1px solid #ddd;
             box-shadow: 0 4px 10px rgba(0,0,0,0.03);
@@ -278,8 +279,14 @@
         }
 
         @media (max-width: 600px) {
-            .branch-grid { grid-template-columns: 1fr; }
-            .review-grid { grid-template-columns: 1fr; }
+            /* 모바일에서 매장 안내 카드를 2열로 배치 */
+            .branch-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .branch-name { font-size: 13px; }
+            .branch-info { padding: 10px; }
+
+            /* 리뷰 사진은 모바일에서도 3열 유지 */
+            .review-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+            
             .form-row { flex-direction: column; }
             .status-item {
                 grid-template-columns: 60px 90px 1fr 60px;
@@ -403,7 +410,7 @@
         <div class="modal-content">
             <button style="position:absolute; top:15px; right:15px; border:none; background:none; font-size:24px; cursor:pointer;" onclick="closeModal()">×</button>
             <div style="font-size: 20px; font-weight: 700; margin-bottom: 15px;">잠깐! 확인해 주세요</div>
-            <p style="color:#666; font-size:15px; margin-bottom:25px; line-height: 1.5;">감사하게도 주문이 많아 전화 연결이 어려워요.<br>최대 혜택으로 빠른 가입을 원하신다면,<br>카톡 상담하기로 상담 없이 특가 혜택 바로 받아보세요!</p>
+            <p style="color:#666; font-size:15px; margin-bottom:25px; line-height: 1.5;">감사하게도 주문이 많아 전화 연결이 어려워요.<br>최대 혜택으로 빠른 가입을 원하신다면,<br>셀프가입으로 상담 없이 특가 혜택 바로 받아보세요!</p>
             <div style="display: flex; gap: 10px;">
                 <button style="flex:1; padding:15px; border-radius:12px; border:1px solid #ddd; background:#fff; font-weight: 600;" onclick="closeModal()">닫기</button>
                 <a href="https://open.kakao.com/o/sdWqcMOg" style="flex:1.5; padding:15px; border-radius:12px; background:var(--primary-blue); color:#fff; text-decoration:none; font-weight:600; display: flex; align-items: center; justify-content: center;" target="_blank">카톡 상담하기</a>
