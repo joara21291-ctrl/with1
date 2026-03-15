@@ -85,7 +85,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         .branch-card {
             background: #fff;
@@ -117,9 +117,45 @@
             font-size: 15px;
             color: #333;
             word-break: keep-all;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .branch-link-text {
+            font-size: 13px;
+            color: #888;
+            font-weight: 500;
         }
 
-        /* 리뷰 섹션 - 가로 3개 유지 */
+        /* 투명 조건 박스 */
+        .trust-banner {
+            background-color: #f8f9fa;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: left;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px; /* 사진들과의 간격 */
+        }
+        .trust-banner .icon {
+            font-size: 24px;
+            line-height: 1;
+        }
+        .trust-content h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+        .trust-content p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            word-break: keep-all;
+        }
+
+        /* 리뷰 섹션 */
         .review-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -191,7 +227,7 @@
             transition: background 0.3s;
         }
 
-        /* 실시간 예약 현황 스타일 */
+        /* 실시간 현황 */
         .status-section {
             background-color: #fff;
             padding: 40px 20px;
@@ -279,14 +315,8 @@
         }
 
         @media (max-width: 600px) {
-            /* 모바일에서 매장 안내 카드를 2열로 배치 */
             .branch-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .branch-name { font-size: 13px; }
-            .branch-info { padding: 10px; }
-
-            /* 리뷰 사진은 모바일에서도 3열 유지 */
             .review-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
-            
             .form-row { flex-direction: column; }
             .status-item {
                 grid-template-columns: 60px 90px 1fr 60px;
@@ -334,25 +364,44 @@
     </section>
 
     <section class="branch-section">
-        <h2>📍 가까운 매장에서 만나요</h2>
+        <h2> 가까운 매장에서 만나요</h2>
+        
+        <!-- 문구 위치 이동: 타이틀 바로 밑, 사진 위 -->
+        <div class="trust-banner">
+            <div class="icon">💡</div>
+            <div class="trust-content">
+                <h4>속임수 없는 투명한 조건</h4>
+                <p>고가 요금제 강요도, 카드 발급 권유도 없습니다. 오직 고객님께 가장 유리한 조건만을 제안합니다.</p>
+            </div>
+        </div>
+
         <div class="branch-grid">
             <div class="branch-card">
-                <!-- 반월점 네이버 지도 연결 -->
                 <a href="https://map.naver.com/p/entry/place/1159387826?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.0722085&lat=35.8737057" target="_blank">
                     <img src="반월점.jpeg" alt="반월점" onerror="this.src='https://placehold.co/400x300?text=Store'">
-                    <div class="branch-info"><div class="branch-name">📍 전주 반월점</div></div>
+                    <div class="branch-info">
+                        <span class="branch-name">📍 전주 반월점</span>
+                        <span class="branch-link-text">매장 정보 보기 ></span>
+                    </div>
                 </a>
             </div>
             <div class="branch-card">
-                <!-- 만성점 네이버 지도 연결 (검색 결과) -->
                 <a href="https://map.naver.com/v5/search/LG%EC%9C%A0%ED%94%8C%EB%9F%AC%EC%8A%A4%20%EB%A7%8C%EC%84%B1%EB%8F%99%20%EB%A7%8C%EC%84%B1%EC%A4%91%EC%95%99%EB%A1%9C%EC%A0%90" target="_blank">
                     <img src="만성점.jpeg" alt="만성점" onerror="this.src='https://placehold.co/400x300?text=Store'">
-                    <div class="branch-info"><div class="branch-name">📍 전주 만성점</div></div>
+                    <div class="branch-info">
+                        <span class="branch-name">📍 전주 만성점</span>
+                        <span class="branch-link-text">매장 정보 보기 ></span>
+                    </div>
                 </a>
             </div>
             <div class="branch-card">
-                <img src="image_bb4579.png" alt="서신점" onerror="this.src='https://placehold.co/400x300?text=Store'">
-                <div class="branch-info"><div class="branch-name">📍 전주 서신점</div></div>
+                <a href="#contact">
+                    <img src="image_bb4579.png" alt="서신점" onerror="this.src='https://placehold.co/400x300?text=Store'">
+                    <div class="branch-info">
+                        <span class="branch-name">📍 전주 서신점</span>
+                        <span class="branch-link-text">매장 정보 보기 ></span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -422,13 +471,7 @@
         const firstNames = ["김", "이", "박", "최", "정", "강", "조", "윤", "장", "임"];
         const lastNames = ["*현", "*준", "*서", "*우", "*진", "*아", "*미", "*영", "*훈", "*희"];
         const phones = ["010-****-1234", "010-****-5678", "010-****-9921", "010-****-4432", "010-****-0012", "010-****-7712", "010-****-3388"];
-        
-        const phoneModels = [
-            "갤럭시 S26 울트라", "갤럭시 S26+", "갤럭시 S26", 
-            "아이폰 17 Pro Max", "아이폰 17 Pro", "아이폰 17",
-            "버디4 ", "키즈폰"
-        ];
-        
+        const phoneModels = ["갤럭시 S26 울트라", "갤럭시 S26+", "갤럭시 S26", "아이폰 17 Pro Max", "아이폰 17 Pro", "아이폰 17", "버디4 ", "키즈폰"];
         const types = ["번호이동", "기기변경", "상담예약", "방문예약"];
         const times = ["1분전", "2분전", "3분전", "5분전", "8분전", "12분전", "15분전"];
 
