@@ -135,7 +135,7 @@
             display: flex;
             align-items: flex-start;
             gap: 15px;
-            margin-bottom: 25px; /* 사진들과의 간격 */
+            margin-bottom: 25px;
         }
         .trust-banner .icon {
             font-size: 24px;
@@ -211,6 +211,49 @@
         .form-row {
             display: flex;
             gap: 10px;
+        }
+
+        /* 개인정보 동의 섹션 - 가운데 정렬로 수정 */
+        .agreement-section {
+            margin: 20px 0;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* 자식 요소들을 가로 가운데 정렬 */
+            gap: 8px;
+        }
+        .agreement-item {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* 내부 콘텐츠 가운데 정렬 */
+            width: 100%;
+        }
+        .agreement-item label {
+            display: flex;
+            align-items: center;
+            font-size: 12px; /* 텍스트 크기 축소 */
+            font-weight: 500;
+            color: #666; /* 색상도 살짝 연하게 */
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+        .agreement-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+            accent-color: #000;
+        }
+        .view-btn {
+            background: #777;
+            color: #fff;
+            border: none;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px; /* 버튼 텍스트 크기도 축소 */
+            cursor: pointer;
+            font-weight: 500;
+            margin-left: 8px; /* 체크박스 라벨과 버튼 사이 간격 */
         }
         
         .submit-btn {
@@ -301,6 +344,7 @@
         }
         .btn:first-child { border-right: 1px solid #333; }
 
+        /* 공통 모달 디자인 */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -314,6 +358,20 @@
             text-align: center; position: relative;
         }
 
+        /* 약관 전용 모달 스타일 */
+        .agreement-modal-content {
+            background: #fff; width: 100%; max-width: 600px; height: 80vh;
+            border-radius: 16px; padding: 50px 15px 15px;
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .agreement-iframe {
+            width: 100%; flex: 1; border: none; border-radius: 8px;
+        }
+        .modal-close-x {
+            position:absolute; top:15px; right:15px; border:none; background:none; font-size:24px; cursor:pointer; font-weight:bold;
+        }
+
         @media (max-width: 600px) {
             .branch-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .review-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
@@ -324,6 +382,7 @@
                 padding: 10px;
             }
             .status-item .time { display: none; }
+            .agreement-modal-content { height: 90vh; }
         }
     </style>
 </head>
@@ -349,7 +408,7 @@
     </section>
 
     <section class="review-section">
-        <h2> 실제 고객 후기 </h2>
+        <h2>⭐ 실제 고객 후기 ⭐</h2>
         <div class="review-grid">
             <div class="review-card">
                 <img src="리뷰1.jpeg" alt="고객 리뷰 1" onerror="this.src='https://placehold.co/400x500?text=Review+1'">
@@ -366,7 +425,6 @@
     <section class="branch-section">
         <h2> 가까운 매장에서 만나요</h2>
         
-        <!-- 문구 위치 이동: 타이틀 바로 밑, 사진 위 -->
         <div class="trust-banner">
             <div class="icon">💡</div>
             <div class="trust-content">
@@ -386,7 +444,7 @@
                 </a>
             </div>
             <div class="branch-card">
-                <a href="https://map.naver.com/v5/search/LG%EC%9C%A0%ED%94%8C%EB%9F%AC%EC%8A%A4%20%EB%A7%8C%EC%84%B1%EB%8F%99%20%EB%A7%8C%EC%84%B1%EC%A4%91%EC%95%99%EB%A1%9C%EC%A0%90" target="_blank">
+                <a href="https://map.naver.com/v5/search/LG%EC%9C%A0%ED%94%8C%EB%9F%AC%EC%8A%A4%20%EB%A7%8C%EC%84%B1%EB%8F%99%20%EB%A7%8C%EC%84%B1%A4%EC%A4%91%EC%95%99%EB%A1%9C%EC%A0%90" target="_blank">
                     <img src="만성점.jpeg" alt="만성점" onerror="this.src='https://placehold.co/400x300?text=Store'">
                     <div class="branch-info">
                         <span class="branch-name">📍 전주 만성점</span>
@@ -432,6 +490,25 @@
                     <label for="model">희망 기종</label>
                     <textarea id="model" class="form-control" rows="2" placeholder="예: 갤럭시 S26, 아이폰 17 등"></textarea>
                 </div>
+
+                <!-- 동의 섹션 (폰트 크기 축소 및 가운데 정렬 적용) -->
+                <div class="agreement-section">
+                    <div class="agreement-item">
+                        <label>
+                            <input type="checkbox" id="agree_personal" required checked>
+                            개인정보처리방침 동의
+                        </label>
+                        <button type="button" class="view-btn" onclick="openAgreement('privacy')">보기</button>
+                    </div>
+                    <div class="agreement-item">
+                        <label>
+                            <input type="checkbox" id="agree_marketing" checked>
+                            마케팅수신 동의
+                        </label>
+                        <button type="button" class="view-btn" onclick="openAgreement('third_party')">보기</button>
+                    </div>
+                </div>
+
                 <button type="button" id="submitButton" class="submit-btn" onclick="submitForm()">최저가 상담 신청하기</button>
             </form>
         </div>
@@ -455,15 +532,25 @@
         <button class="btn" onclick="openModal()">전화 문의하기</button>
     </div>
 
+    <!-- 전화 확인 모달 -->
     <div id="callModal" class="modal-overlay">
         <div class="modal-content">
-            <button style="position:absolute; top:15px; right:15px; border:none; background:none; font-size:24px; cursor:pointer;" onclick="closeModal()">×</button>
+            <button class="modal-close-x" onclick="closeModal()">×</button>
             <div style="font-size: 20px; font-weight: 700; margin-bottom: 15px;">잠깐! 확인해 주세요</div>
             <p style="color:#666; font-size:15px; margin-bottom:25px; line-height: 1.5;">감사하게도 주문이 많아 전화 연결이 어려워요.<br>최대 혜택으로 빠른 가입을 원하신다면,<br>셀프가입으로 상담 없이 특가 혜택 바로 받아보세요!</p>
             <div style="display: flex; gap: 10px;">
                 <button style="flex:1; padding:15px; border-radius:12px; border:1px solid #ddd; background:#fff; font-weight: 600;" onclick="closeModal()">닫기</button>
                 <a href="https://open.kakao.com/o/sdWqcMOg" style="flex:1.5; padding:15px; border-radius:12px; background:var(--primary-blue); color:#fff; text-decoration:none; font-weight:600; display: flex; align-items: center; justify-content: center;" target="_blank">카톡 상담하기</a>
             </div>
+        </div>
+    </div>
+
+    <!-- 약관 확인 전용 모달 -->
+    <div id="agreementModal" class="modal-overlay">
+        <div class="agreement-modal-content">
+            <button class="modal-close-x" onclick="closeAgreement()">×</button>
+            <iframe id="agreementFrame" class="agreement-iframe" src="about:blank"></iframe>
+            <button style="width: 100%; padding: 15px; background: #f1f3f5; border: none; font-weight: 700; cursor: pointer; border-radius: 8px; margin-top: 10px;" onclick="closeAgreement()">확인 및 닫기</button>
         </div>
     </div>
 
@@ -550,14 +637,39 @@
         function openModal() { document.getElementById('callModal').style.display = 'flex'; }
         function closeModal() { document.getElementById('callModal').style.display = 'none'; }
 
+        function openAgreement(type) {
+            const modal = document.getElementById('agreementModal');
+            const frame = document.getElementById('agreementFrame');
+            
+            if(type === 'privacy') {
+                frame.src = "https://land.gonplan.co.kr/resources/common/agreements/privacy_agreement1.html";
+            } else if(type === 'third_party') {
+                frame.src = "https://land.gonplan.co.kr/resources/common/agreements/privacy_agreement2.html";
+            } else if(type === 'marketing') {
+                frame.src = "https://land.gonplan.co.kr/resources/common/agreements/privacy_agreement3.html";
+            }
+            
+            modal.style.display = 'flex';
+        }
+        function closeAgreement() {
+            document.getElementById('agreementModal').style.display = 'none';
+            document.getElementById('agreementFrame').src = "about:blank";
+        }
+
         async function submitForm() {
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const carrier = document.querySelector('input[name="carrier"]:checked')?.value || '미선택';
             const model = document.getElementById('model').value;
+            const agreePersonal = document.getElementById('agree_personal').checked;
 
             if(!name || !phone) {
                 alert('성함과 연락처를 입력해주세요.');
+                return;
+            }
+
+            if(!agreePersonal) {
+                alert('개인정보처리방침에 동의하셔야 신청이 가능합니다.');
                 return;
             }
 
@@ -569,7 +681,7 @@
             const t2 = "AAGWb-AkPRIjsxbIzc8k6W6oBr9zjYTrNVo";
             const fullToken = `${t1}:${t2}`;
             const chatId = "8682551663";
-            const text = `🎯 [랜딩페이지 상담 신청]\n\n성함: ${name}\n연락처: ${phone}\n통신사: ${carrier}\n문의내용: ${model}`;
+            const text = `🎯 [랜딩페이지 상담 신청]\n\n성함: ${name}\n연락처: ${phone}\n통신사: ${carrier}\n문의내용: ${model}\n마케팅동의: ${document.getElementById('agree_marketing').checked ? '동의' : '미동의'}`;
 
             try {
                 const res = await fetch(`https://api.telegram.org/bot${fullToken}/sendMessage`, {
