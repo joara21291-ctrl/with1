@@ -155,13 +155,28 @@
             word-break: keep-all;
         }
 
-        /* 리뷰 섹션 - 가시성 확보를 위해 그리드 수정 */
+        /* 리뷰 섹션 - 스와이프 기능 적용 */
+        .review-section {
+            padding-left: 0;
+            padding-right: 0;
+            overflow: hidden;
+        }
         .review-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 3열에서 2열로 변경하여 크기 확대 */
+            display: flex;
             gap: 15px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 0 20px 20px 20px;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+            text-align: left;
+        }
+        .review-grid::-webkit-scrollbar {
+            display: none; /* Chrome, Safari */
         }
         .review-card {
+            flex: 0 0 80%; /* 모바일에서 다음 카드가 살짝 보이도록 설정 */
+            scroll-snap-align: center;
             background: #fff;
             border-radius: 12px;
             overflow: hidden;
@@ -373,9 +388,14 @@
             position:absolute; top:15px; right:15px; border:none; background:none; font-size:24px; cursor:pointer; font-weight:bold;
         }
 
+        @media (min-width: 601px) {
+            .review-card {
+                flex: 0 0 calc(50% - 15px); /* PC에서는 2열 유지 */
+            }
+        }
+
         @media (max-width: 600px) {
             .branch-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .review-grid { grid-template-columns: repeat(1, 1fr); gap: 15px; } /* 모바일에서는 1열로 더 크게 노출 */
             .form-row { flex-direction: column; }
             .status-item {
                 grid-template-columns: 60px 90px 1fr 60px;
@@ -431,6 +451,7 @@
                 <img src="리뷰3.jpeg" alt="고객 리뷰 3" onerror="this.src='https://placehold.co/400x500?text=Review+3'">
             </div>
         </div>
+        <p style="font-size: 12px; color: #999; margin-top: 10px;">⬅ 옆으로 밀어서 더 많은 리뷰를 확인하세요 ➡</p>
     </section>
 
     <section class="branch-section">
